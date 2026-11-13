@@ -1,829 +1,1029 @@
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d1b">
-<title>NextWatchVidio — Trending Videos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trending USA | Viral News & Videos</title>
+<meta name="description" content="Discover trending stories, viral videos, and popular moments across America.">
+<meta name="theme-color" content="#ffffff">
 
 <style>
 :root {
-  --bg: #080d1b;
-  --panel: #111a2c;
-  --orange: #ff6b35;
-  --yellow: #ffd166;
-  --cyan: #42e8ff;
-  --purple: #9270ff;
-  --muted: #a9b5cc;
+    --blue: #173b70;
+    --red: #e32636;
+    --text: #202633;
+    --muted: #687386;
+    --border: #e5e7eb;
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  color: #fff;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-  background:
-    radial-gradient(ellipse at 0 0, #422218 0, transparent 35%),
-    radial-gradient(ellipse at 100% 25%, #122c50 0, transparent 35%),
-    var(--bg);
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-.page {
-  max-width: 520px;
-  width: 100%;
-  min-height: 100vh;
-  margin: auto;
-  padding-bottom: 30px;
+#particles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .5;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 22px 16px;
+header,
+main,
+footer,
+.topbar,
+.ticker {
+    position: relative;
+    z-index: 1;
+}
+
+/* TOP BAR */
+
+.topbar {
+    background: #f5f7fa;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.topbar strong {
+    color: var(--blue);
+}
+
+/* HEADER */
+
+header {
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 1150px;
+    margin: auto;
+    padding: 19px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 21px;
-  font-weight: 950;
-  letter-spacing: -.7px;
+    font-size: 27px;
+    font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -1px;
+    line-height: 1.2;
 }
 
-.logo-icon {
-  display: grid;
-  place-items: center;
-  width: 39px;
-  height: 39px;
-  flex-shrink: 0;
-  border-radius: 13px;
-  color: #fff;
-  background: linear-gradient(140deg, var(--orange), #ffb347);
-  box-shadow: 0 0 25px #ff6b3545;
+.logo span,
+.footer-logo span {
+    color: var(--red);
 }
 
-.logo span {
-  color: var(--yellow);
+.logo small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: normal;
+    margin-top: 5px;
 }
 
-.header-badge {
-  padding: 7px 10px;
-  border: 1px solid #ffd1664d;
-  border-radius: 20px;
-  background: #ffd16610;
-  color: var(--yellow);
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  white-space: nowrap;
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.hero {
-  padding: 10px 18px 20px;
+nav a {
+    color: #263348;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
 }
 
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 12px;
-  color: var(--yellow);
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 2px;
+nav a:hover {
+    color: var(--red);
 }
 
-.hero-label span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 12px var(--orange);
+/* TRENDING TICKER */
+
+.ticker {
+    background: var(--blue);
+    color: white;
+    padding: 10px 5%;
+    font-size: 12px;
 }
 
-.hero h1 {
-  font-size: clamp(28px, 7vw, 37px);
-  font-weight: 950;
-  line-height: 1.12;
-  letter-spacing: -1px;
+.ticker strong {
+    background: var(--red);
+    padding: 5px 9px;
+    margin-right: 10px;
 }
 
-.hero h1 span {
-  display: block;
-  margin-top: 5px;
-  color: var(--orange);
+/* MAIN */
+
+.container {
+    max-width: 1050px;
+    width: 92%;
+    margin: 30px auto;
 }
 
-.hero p {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
+.section-heading {
+    font-size: 21px;
+    font-weight: 800;
+    border-left: 4px solid var(--red);
+    padding-left: 12px;
+    margin-bottom: 20px;
 }
 
-/* NATIVE BANNERS */
+.section-description {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: -12px;
+    margin-bottom: 22px;
+}
+
+/* FEATURED NEWS */
+
+.featured {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.featured-main {
+    min-height: 430px;
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    background:
+        linear-gradient(
+            0deg,
+            rgba(10,23,43,.98) 0%,
+            rgba(10,23,43,.65) 45%,
+            rgba(10,23,43,.08) 100%
+        ),
+        linear-gradient(135deg, #a8c5e5, #315985);
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-main::before {
+    content: "USA";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 75px;
+    font-weight: 900;
+    color: rgba(255,255,255,.15);
+    pointer-events: none;
+}
+
+/* FIRST NATIVE BANNER INSIDE BLUE BOX */
+
+.native-inside-feature {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 90px;
+    margin-bottom: 22px;
+    padding: 10px;
+    text-align: center;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.native-inside-feature .ads-label {
+    color: rgba(255,255,255,.75);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+/* FEATURED TEXT */
+
+.badge {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px 9px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    align-self: flex-start;
+    position: relative;
+    z-index: 1;
+}
+
+.featured-main h1 {
+    font-size: clamp(25px, 3.5vw, 35px);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.featured-main p {
+    font-size: 13px;
+    color: #eef3fa;
+    position: relative;
+    z-index: 1;
+}
+
+.featured-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.story {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 17px;
+    transition: .2s;
+}
+
+.story:hover {
+    border-color: #c8d4e5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(0,0,0,.05);
+}
+
+.category {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--red);
+    letter-spacing: .7px;
+    margin-bottom: 5px;
+}
+
+.story h3 {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.story p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* SECOND NATIVE BANNER */
 
 .video-native-ad {
-  margin: 12px 14px 16px;
-  padding: 12px;
-  overflow: hidden;
-  border: 1px solid #ffd16624;
-  border-radius: 17px;
-  background: linear-gradient(140deg, #172036, #101626);
-  box-shadow: 0 10px 28px #00000024;
+    width: 100%;
+    min-height: 90px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px;
+    margin: 25px 0 35px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .ads-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  margin-bottom: 10px;
-  color: #9ba8c0;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 2px;
+    color: #9299a5;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
 }
 
-.ads-label::before,
-.ads-label::after {
-  content: "";
-  width: 32px;
-  height: 1px;
-  background: #ffd16670;
+/* NEWS GRID */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 35px;
 }
 
-.native-slot {
-  width: 100%;
-  min-width: 0;
-  overflow-wrap: anywhere;
+.news-card {
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    overflow: hidden;
+    background: white;
+    transition: .2s;
 }
 
-/* TRENDING */
-
-.trending {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 14px 17px;
-  padding: 14px;
-  border: 1px solid #ff9a4933;
-  border-radius: 16px;
-  background: linear-gradient(110deg, #ff6b351b, #ffd16608, #42e8ff09);
+.news-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.06);
 }
 
-.trending-icon {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  border-radius: 13px;
-  background: #ff6b3522;
-  font-size: 21px;
+.news-visual {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 45px;
+    background: linear-gradient(135deg, #edf3fa, #d9e5f3);
 }
 
-.trending-title {
-  margin-bottom: 4px;
-  color: var(--yellow);
-  font-size: 11px;
-  font-weight: 950;
-  letter-spacing: 1px;
+.news-body {
+    padding: 17px;
 }
 
-.trending-text {
-  color: #c1cbe0;
-  font-size: 11px;
-  line-height: 1.55;
+.news-body h3 {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 9px;
 }
 
-/* VIDEO */
+.news-body p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.article-meta {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #8993a3;
+}
+
+/* VIDEO SECTION */
+
+.video-section {
+    margin: 45px 0;
+}
+
+.video-intro {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.video-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 25px;
+    align-items: center;
+}
 
 .video-card {
-  margin: 0 14px;
-  overflow: hidden;
-  border: 1px solid #ffb34736;
-  border-radius: 23px;
-  background: linear-gradient(155deg, #17233a, #0c1424 75%);
-  box-shadow: 0 20px 55px #00000045, 0 0 30px #ff6b350a;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d8e5f4, #7899c0);
+    border: 1px solid var(--border);
 }
 
-.card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 15px;
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.card-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.card-title span {
-  color: var(--yellow);
-}
-
-.quality {
-  padding: 5px 8px;
-  border: 1px solid #42e8ff3d;
-  border-radius: 6px;
-  background: #42e8ff0d;
-  color: var(--cyan);
-  font-size: 9px;
-  font-weight: 900;
-}
-
-.photo-box {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  min-height: 230px;
-  overflow: hidden;
-  background: #080d1b;
-}
-
-#videoPoster {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 72vh;
-  object-fit: contain;
-  background: #080d1b;
-  visibility: hidden;
-  transition: transform .4s ease, filter .4s ease;
-}
-
-.photo-box:hover #videoPoster {
-  transform: scale(1.02);
-  filter: saturate(1.08);
-}
-
-/* LOADING */
-
-.photo-loading {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-  background: radial-gradient(circle at center, #26324d, #080d1b 75%);
-  transition: opacity .35s ease, visibility .35s ease;
-}
-
-.photo-loading.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.spinner {
-  width: 54px;
-  height: 54px;
-  border: 4px solid #ffffff15;
-  border-top-color: var(--orange);
-  border-right-color: var(--yellow);
-  border-radius: 50%;
-  animation: spin .8s linear infinite;
-  box-shadow: 0 0 24px #ff6b352b;
-}
-
-.loading-text {
-  color: #fff;
-  font-size: 10px;
-  font-weight: 950;
-  letter-spacing: 3px;
-}
-
-.loading-sub {
-  color: #a9b5cc;
-  font-size: 10px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* PLAY BUTTON */
-
-.play-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  background: linear-gradient(
-    180deg,
-    #080d1b05,
-    #080d1b08 45%,
-    #080d1b75
-  );
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.25);
 }
 
 .play-button {
-  display: grid;
-  place-items: center;
-  width: 82px;
-  height: 82px;
-  padding-left: 5px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  color: white;
-  font-size: 29px;
-  background: linear-gradient(140deg, #ff6b35, #ffb347 65%, #ffd166);
-  box-shadow: 0 0 0 8px #ffffff20, 0 0 38px #ff6b3590;
-  animation: playPulse 1.8s ease-in-out infinite;
-  transition: transform .2s ease;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+    background: var(--red);
+    color: white;
+    text-decoration: none;
+    font-size: 29px;
+    box-shadow: 0 0 0 9px rgba(255,255,255,.25);
+    transition: transform .2s, background .2s;
 }
 
-.play-overlay:hover .play-button {
-  transform: scale(1.1);
+.play-button:hover {
+    transform: scale(1.1);
+    background: #b81728;
 }
 
-@keyframes playPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 7px #ffffff18, 0 0 25px #ff6b3570;
-  }
-
-  50% {
-    box-shadow: 0 0 0 14px #ffffff08, 0 0 43px #ffd16680;
-  }
+.video-copy h2 {
+    font-size: clamp(21px, 3vw, 28px);
+    line-height: 1.3;
+    margin-bottom: 12px;
 }
 
-/* VIEWS & LIKES */
-
-.engagement-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 9px;
-  padding: 14px;
-  border-top: 1px solid #ffffff12;
-  border-bottom: 1px solid #ffffff12;
+.video-copy p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 18px;
 }
 
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
+.watch-button {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    padding: 11px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background .2s;
 }
 
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #b7c3d9;
-  font-size: 11px;
-  white-space: nowrap;
+.watch-button:hover {
+    background: #b81728;
 }
 
-.stat strong {
-  color: var(--cyan);
+/* HISTATS */
+
+.histats-section {
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 25px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
 }
 
-.stat .heart {
-  color: var(--orange);
+/* FOOTER */
+
+footer {
+    background: #f5f7fa;
+    border-top: 1px solid var(--border);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
 }
 
-.like-button {
-  flex-shrink: 0;
-  padding: 9px 12px;
-  border: 1px solid #ff6b3566;
-  border-radius: 24px;
-  background: #ff6b3515;
-  color: #ffb28d;
-  font-size: 11px;
-  font-weight: 900;
-  cursor: pointer;
+.footer-logo {
+    font-size: 23px;
+    font-weight: 900;
+    color: var(--blue);
+    margin-bottom: 8px;
 }
 
-.like-button.liked {
-  background: #ff6b3538;
-  color: var(--yellow);
+footer p {
+    margin-top: 6px;
 }
 
-.like-button:active {
-  transform: scale(.96);
-}
+/* RESPONSIVE */
 
-/* DESCRIPTION */
+@media (max-width: 720px) {
+    .header-inner {
+        flex-direction: column;
+        text-align: center;
+    }
 
-.content {
-  padding: 19px 16px;
-}
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
 
-.content h2 {
-  margin-bottom: 9px;
-  font-size: 21px;
-  font-weight: 950;
-  line-height: 1.3;
-}
+    .featured,
+    .video-layout {
+        grid-template-columns: 1fr;
+    }
 
-.content p {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.75;
-}
+    .featured-main {
+        min-height: 430px;
+        padding: 20px;
+    }
 
-.content .video-native-ad {
-  margin: 18px 0 0;
-}
+    .featured-main::before {
+        font-size: 60px;
+    }
 
-.footer {
-  padding: 23px 14px 5px;
-  color: #7786a3;
-  text-align: center;
-  font-size: 10px;
-  line-height: 1.8;
-}
+    .native-inside-feature {
+        margin-bottom: 20px;
+    }
 
-@media (max-width: 360px) {
-  .logo {
-    gap: 7px;
-    font-size: 18px;
-  }
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .logo-icon {
-    width: 34px;
-    height: 34px;
-  }
+    .news-visual {
+        height: 180px;
+    }
 
-  .header-badge {
-    padding: 6px 7px;
-    font-size: 8px;
-  }
+    .topbar {
+        justify-content: center;
+    }
 
-  .stats {
-    gap: 8px;
-  }
-
-  .stat {
-    font-size: 10px;
-  }
-
-  .engagement-bar {
-    padding: 12px 10px;
-  }
-
-  .play-button {
-    width: 70px;
-    height: 70px;
-    font-size: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-  }
+    .play-button {
+        width: 62px;
+        height: 62px;
+        font-size: 25px;
+    }
 }
 </style>
+<link rel="me" href="https://www.blogger.com/profile/04521193710572186939" />
+<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+<!-- --><style type="text/css">@import url(//www.blogger.com/static/v1/v-css/navbar/3334278262-classic.css);
+div.b-mobile {display:none;}
+</style>
+
 </head>
 
-<body>
+<body><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"></div>
+<script type="text/javascript" src="https://apis.google.com/js/platform.js"></script>
+<script type="text/javascript">
+      gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: 'https://www.blogger.com/navbar/5858489067690951797?origin\x3dhttps://americavibegrils.blogspot.com',
+              where: document.getElementById("navbar-iframe-container"),
+              id: "navbar-iframe"
+          });
+        }
+      });
+    </script>
 
-<div class="page">
+<canvas id="particles"></canvas>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <div class="logo-icon" aria-hidden="true">▶</div>
-      <div>NextWatch<span>Vidio</span></div>
-    </div>
+<!-- TOP BAR -->
 
-    <div class="header-badge">VIDEO HUB</div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-label">
-      <span></span>
-      YOUR DAILY VIDEO SPOT
-    </div>
-
-    <h1>
-      Discover What's
-      <span>Hot Right Now.</span>
-    </h1>
-
-    <p>
-      Explore featured content and continue watching with one tap.
-    </p>
-  </section>
-
-  <!-- NATIVE BANNER 1 -->
-  <div class="video-native-ad">
-    <div class="ads-label">ADVERTISEMENT</div>
-
-    <div class="native-slot">
-      <script
-        data-cfasync="false"
-        async
-        type="text/javascript"
-        src="https://qw.rolledipocras.com/tiTtAiKEeLuZ/151239">
-      </script>
-    </div>
-  </div>
-
-  <!-- TRENDING -->
-  <section class="trending">
-    <div class="trending-icon">🔥</div>
-
-    <div>
-      <div class="trending-title">TRENDING NOW</div>
-
-      <div class="trending-text">
-        Check out the featured preview and continue to the next page.
-      </div>
-    </div>
-  </section>
-
-  <!-- VIDEO CARD -->
-  <article class="video-card">
-
-    <div class="card-top">
-      <div class="card-title">
-        <span>✦</span> Featured Video
-      </div>
-
-      <div class="quality">HD PREVIEW</div>
-    </div>
-
-    <!-- PHOTO -->
-    <div class="photo-box">
-
-      <div class="photo-loading" id="photoLoading">
-        <div class="spinner"></div>
-        <div class="loading-text">LOADING PREVIEW</div>
-        <div class="loading-sub">
-          Preparing your content...
-        </div>
-      </div>
-
-      <img
-        id="videoPoster"
-        src="https://cdn.aceimg.com/8GXI80FeL.jpg"
-        alt="Featured video preview"
-        fetchpriority="high"
-      >
-
-      <!-- SATU-SATUNYA LINK TUJUAN -->
-      <a
-        class="play-overlay"
-        href=""
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open the next page"
-      >
-        <span class="play-button" aria-hidden="true">▶</span>
-      </a>
-
-    </div>
-
-    <!-- NATIVE BANNER 2 -->
-    <div class="video-native-ad">
-      <div class="ads-label">ADVERTISEMENT</div>
-
-      <div class="native-slot">
-        <script
-          data-cfasync="false"
-          async
-          type="text/javascript"
-          src="https://ju.bionomysolera.com/tKxL7nY316cl3r5/155722">
-        </script>
-      </div>
-    </div>
-
-    <!-- ENGAGEMENT -->
-    <div class="engagement-bar">
-
-      <div class="stats">
-
-        <div class="stat">
-          <span>◉</span>
-          <strong id="viewCount">12.8K</strong>
-          <span>views*</span>
-        </div>
-
-        <div class="stat">
-          <span class="heart">♥</span>
-          <strong id="likeCount">2.4K</strong>
-          <span>likes*</span>
-        </div>
-
-      </div>
-
-      <button
-        class="like-button"
-        id="likeButton"
-        type="button"
-        aria-pressed="false"
-      >
-        ♡ Like
-      </button>
-
-    </div>
-
-    <!-- CONTENT -->
-    <div class="content">
-
-      <h2>Ready to Keep Watching?</h2>
-
-      <p>
-        Tap the play button on the preview to continue to the next page.
-        Discover more content on NextWatchVidio.
-      </p>
-
-    </div>
-
-  </article>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div>© 2026 NextWatchVidio</div>
-    <div>Discover • Explore • Watch</div>
-    <div>*Engagement numbers are illustrative, not live analytics.</div>
-  </footer>
-
+<div class="topbar">
+    <span><strong>TRENDING USA</strong> | Viral News & Videos</span>
+    <span id="currentDate"></span>
 </div>
 
-<!-- PHOTO LOADING -->
-<script>
-(function () {
-  const poster = document.getElementById("videoPoster");
-  const loading = document.getElementById("photoLoading");
+<!-- HEADER -->
 
-  if (!poster || !loading) return;
+<header>
+    <div class="header-inner">
 
-  const started = Date.now();
+        <div class="logo">
+            TRENDING<span>USA</span>
+            <small>VIRAL VIDEOS • LATEST STORIES</small>
+        </div>
 
-  let imageReady = false;
-  let delayPassed = false;
-  let finished = false;
+        <nav>
+            <a href="#home">HOME</a>
+            <a href="#trending">TRENDING</a>
+            <a href="#stories">USA NEWS</a>
+            <a href="#videos">VIRAL VIDEOS</a>
+        </nav>
 
-  function finishLoading() {
-    if (finished || !imageReady || !delayPassed) return;
+    </div>
+</header>
 
-    finished = true;
+<!-- TRENDING TICKER -->
 
-    poster.style.visibility = "visible";
-    loading.classList.add("hide");
+<div class="ticker">
+    <strong>TRENDING NOW</strong>
+    Viral moments, internet sensations, and stories everyone is talking about.
+</div>
 
-    setTimeout(function () {
-      loading.remove();
-    }, 400);
-  }
+<main class="container" id="home">
 
-  poster.addEventListener("load", function () {
-    imageReady = true;
-    finishLoading();
-  });
+    <!-- TRENDING IN AMERICA -->
 
-  poster.addEventListener("error", function () {
-    imageReady = true;
-    finishLoading();
-  });
+    <section id="trending">
 
-  if (poster.complete) {
-    imageReady = true;
-  }
+        <h2 class="section-heading">Trending in America</h2>
 
-  setTimeout(function () {
-    delayPassed = true;
-    finishLoading();
-  }, Math.max(0, 3000 - (Date.now() - started)));
+        <p class="section-description">
+            Discover interesting stories and viral moments from across the internet.
+        </p>
 
-  finishLoading();
+        <!-- FEATURED BOX WITH FIRST NATIVE BANNER INSIDE -->
 
-  poster.addEventListener("contextmenu", function (event) {
-    event.preventDefault();
-  });
+        <div class="featured">
 
-})();
-</script>
+            <article class="featured-main">
 
-<!-- LIKE BUTTON -->
-<script>
-(function () {
+                <!-- NATIVE BANNER 1 -->
 
-  const button = document.getElementById("likeButton");
-  const count = document.getElementById("likeCount");
+                <div class="native-inside-feature">
 
-  if (!button || !count) return;
+                    <div class="ads-label">ADVERTISEMENT</div>
 
-  const initialLikes = 2400;
-  let liked = false;
+                    <script
+                        data-cfasync="false"
+                        async
+                        type="text/javascript"
+                        src="">
+                    </script>
 
-  function formatCount(number) {
-    return number >= 1000
-      ? (number / 1000).toFixed(1).replace(/\.0$/, "") + "K"
-      : String(number);
-  }
+                </div>
 
-  button.addEventListener("click", function () {
+                <!-- FEATURED HEADLINE -->
 
-    liked = !liked;
+                <span class="badge">VIRAL SPOTLIGHT</span>
 
-    count.textContent = formatCount(
-      initialLikes + (liked ? 1 : 0)
-    );
+                <h1>The Internet Can't Stop Talking About These Viral Moments</h1>
 
-    button.classList.toggle("liked", liked);
+                <p>
+                    From unexpected public moments to heartwarming real-life
+                    stories, online videos continue to capture the attention
+                    of audiences across the United States.
+                </p>
 
-    button.setAttribute(
-      "aria-pressed",
-      String(liked)
-    );
+            </article>
 
-    button.textContent =
-      liked ? "♥ Liked" : "♡ Like";
+            <!-- SIDE STORIES -->
 
-  });
+            <div class="featured-list">
 
-})();
-</script>
+                <article class="story">
+                    <span class="category">INTERNET CULTURE</span>
 
-<!-- HISTATS -->
+                    <h3>Why Everyday Moments Can Become Internet Sensations</h3>
+
+                    <p>
+                        Ordinary moments sometimes become popular when viewers
+                        find them surprising, funny, or relatable.
+                    </p>
+                </article>
+
+                <article class="story">
+                    <span class="category">VIRAL VIDEOS</span>
+
+                    <h3>Unexpected Reactions Are Capturing Online Attention</h3>
+
+                    <p>
+                        Authentic reactions and surprising scenes continue
+                        to inspire conversations on social media.
+                    </p>
+                </article>
+
+                <article class="story">
+                    <span class="category">SOCIAL MEDIA</span>
+
+                    <h3>The Short Videos Keeping Viewers Watching</h3>
+
+                    <p>
+                        Quick storytelling and memorable moments remain
+                        popular features of online entertainment.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LATEST STORIES -->
+
+    <section id="stories">
+
+        <h2 class="section-heading">Latest Viral Stories</h2>
+
+        <p class="section-description">
+            Real-life moments, digital trends, and stories people love to share.
+        </p>
+
+        <div class="news-grid">
+
+            <article class="news-card">
+
+                <div class="news-visual">📱</div>
+
+                <div class="news-body">
+                    <span class="category">SOCIAL MEDIA</span>
+
+                    <h3>How a Short Video Can Reach Millions of People</h3>
+
+                    <p>
+                        A compelling opening, a relatable situation, and
+                        a surprising ending can help a video reach a wider audience.
+                    </p>
+
+                    <div class="article-meta">INTERNET CULTURE</div>
+                </div>
+
+            </article>
+
+            <article class="news-card">
+
+                <div class="news-visual">😲</div>
+
+                <div class="news-body">
+                    <span class="category">UNEXPECTED MOMENTS</span>
+
+                    <h3>The Surprising Moments That Make People Hit Share</h3>
+
+                    <p>
+                        Unexpected encounters and genuine reactions often
+                        inspire conversations across online communities.
+                    </p>
+
+                    <div class="article-meta">TRENDING STORIES</div>
+                </div>
+
+            </article>
+
+            <article class="news-card">
+
+                <div class="news-visual">🌎</div>
+
+                <div class="news-body">
+                    <span class="category">ONLINE TRENDS</span>
+
+                    <h3>Why People Love Watching Real-Life Stories Online</h3>
+
+                    <p>
+                        Heartwarming acts and unbelievable coincidences
+                        give audiences something memorable to share.
+                    </p>
+
+                    <div class="article-meta">VIRAL CULTURE</div>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- NATIVE BANNER 2 -->
+
+    <div class="video-native-ad">
+
+        <div class="ads-label">ADVERTISEMENT</div>
+
+        <div id="native-ad-script-slot">
+
+            <script
+                data-cfasync="false"
+                async
+                type="text/javascript"
+                src="">
+            </script>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURED VIDEO -->
+
+    <section class="video-section" id="videos">
+
+        <h2 class="section-heading">Watch the Viral Video</h2>
+
+        <p class="video-intro">
+            Curious to see the full story? Click below to continue watching.
+        </p>
+
+        <div class="video-layout">
+
+            <div class="video-card">
+
+                <img
+                    class="video-thumbnail"
+                    src="https://cdn.aceimg.com/UyRQf4OWP.png"
+                    alt="Featured video thumbnail"
+                    loading="lazy"
+                >
+
+                <div class="video-overlay">
+
+                    <a
+                        class="play-button"
+                        href=""
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Watch the video"
+                    >▶</a>
+
+                </div>
+
+            </div>
+
+            <div class="video-copy">
+
+                <span class="category">FEATURED VIDEO</span>
+
+                <h2>Watch the Featured Video</h2>
+
+                <p>
+                    Click the play button to continue to the video page.
+                </p>
+
+                <a
+                    class="watch-button"
+                    href="https://reacogenk.pages.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >▶ &nbsp; Watch Now →</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <p style="font-size:11px;color:#8993a3;margin-bottom:25px;">
+        Editorial note: The stories on this demo page are illustrative examples
+        and are not verified reports of current trending events.
+    </p>
+
+    <!-- HISTATS COUNTER -->
+
+    <div class="histats-section">
+        <div id="histats_counter"></div>
+
+        <noscript>
+            <a href="/" target="_blank" rel="noopener noreferrer">
+                <img
+                    src="https://sstatic1.histats.com/0.gif?5044778&101"
+                    alt="Website visitor statistics"
+                    style="border:0;"
+                >
+            </a>
+        </noscript>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+        TRENDING<span>USA</span>
+    </div>
+
+    <p>Discover What's Trending Across America.</p>
+
+    <p>
+        &copy; <span id="year"></span> Trending USA. All rights reserved.
+    </p>
+
+</footer>
+
+<!-- HISTATS TRACKING -->
+
 <script type="text/javascript">
-
 var _Hasync = _Hasync || [];
 
 _Hasync.push([
-  "Histats.start",
-  "1,5044778,4,0,0,0,00010000"
+    'Histats.start',
+    '1,5055942,4,8,210,40,00011111'
 ]);
 
-_Hasync.push([
-  "Histats.fasi",
-  "1"
-]);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
 
-_Hasync.push([
-  "Histats.track_hits",
-  ""
-]);
+(function() {
+    var hs = document.createElement('script');
+    hs.type = 'text/javascript';
+    hs.async = true;
+    hs.src = 'https://s10.histats.com/js15_as.js';
 
-(function () {
-
-  var hs = document.createElement("script");
-
-  hs.type = "text/javascript";
-  hs.async = true;
-  hs.src = "https://s10.histats.com/js15_as.js";
-
-  hs.onload = function () {
-    console.log("Histats script berhasil dimuat.");
-  };
-
-  hs.onerror = function () {
-    console.error("Histats gagal dimuat.");
-  };
-
-  (document.head || document.body).appendChild(hs);
-
+    (
+        document.getElementsByTagName('head')[0] ||
+        document.getElementsByTagName('body')[0]
+    ).appendChild(hs);
 })();
-
 </script>
 
-<noscript>
-  <a
-    href="https://www.histats.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <img
-      src="https://sstatic1.histats.com/0.gif?5044778&101"
-      alt=""
-      border="0"
-    >
-  </a>
-</noscript>
+<!-- PARTICLE ANIMATION -->
 
-<!-- END HISTATS -->
+<script>
+document.getElementById("currentDate").textContent =
+    new Date().toLocaleDateString("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    });
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let width = 0;
+let height = 0;
+
+function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(
+        55,
+        Math.max(20, Math.floor(width / 22))
+    );
+
+    particles = [];
+
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 2 + 0.5,
+            dx: (Math.random() - 0.5) * 0.35,
+            dy: (Math.random() - 0.5) * 0.35
+        });
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p, i) => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > width) p.dx *= -1;
+        if (p.y < 0 || p.y > height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+
+        ctx.fillStyle = "rgba(23, 59, 112, 0.22)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+            const q = particles[j];
+
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 95) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+
+                ctx.strokeStyle =
+                    `rgba(23, 59, 112, ${0.07 * (1 - distance / 95)})`;
+
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+            }
+        }
+    });
+
+    requestAnimationFrame(animateParticles);
+}
+
+window.addEventListener("resize", resizeCanvas);
+
+resizeCanvas();
+animateParticles();
+</script>
 
 </body>
 </html>
